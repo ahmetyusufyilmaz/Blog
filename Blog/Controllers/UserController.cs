@@ -7,40 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.DataAccess;
 using Blog.Models;
+using Blog.DataAccess.EntityFramework;
 
 namespace Blog.Controllers
 {
     public class UserController : Controller
     {
-        private readonly BlogContext _context;
+        private readonly IRepositoryBase<User> _repositoryBase;
 
-        public UserController(BlogContext context)
+        public UserController(IRepositoryBase<User> repositoryBase)
         {
-            _context = context;
+            _repositoryBase = repositoryBase;
         }
 
         // GET: User
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            var result = _repositoryBase.GetAll();
+            return View();
         }
 
         // GET: User/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
+            return View();
         }
 
         // GET: User/Create
@@ -56,29 +52,15 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            var result = _repositoryBase.Add(user);
+
             return View(user);
         }
 
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+            return View();
         }
 
         // POST: User/Edit/5
@@ -88,50 +70,25 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
         {
-            if (id != user.Id)
-            {
-                return NotFound();
-            }
+            var selecteduser = _repositoryBase.Get(p => p.Id == id);
+            selecteduser.FirstName = user.FirstName;
+            selecteduser.LastLogin = user.LastLogin;
+            selecteduser.LastName = user.LastName;
+            selecteduser.Mobile = user.Mobile;
+            selecteduser.Email = user.Email;
+            selecteduser.RegisteredAt = user.RegisteredAt;
+            selecteduser.Password = user.Password;
+            selecteduser.Intro = user.Intro;
+            selecteduser.Profile = user.Profile;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            _repositoryBase.Update(selecteduser);
+            return View();
         }
 
         // GET: User/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
+            return View();
         }
 
         // POST: User/Delete/5
@@ -139,15 +96,12 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return true;
         }
     }
 }

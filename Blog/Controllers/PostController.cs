@@ -22,23 +22,18 @@ namespace Blog.Controllers
         }
 
         // GET: Post
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
            var result =_repositoryBase.GetAll();
            
-            return View();
+            return View(result);
         }
 
         // GET: Post/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-
-            return View();
+            var result = _repositoryBase.Get(p => p.Id == id);
+            return View(result);
         }
 
         // GET: Post/Create
@@ -52,7 +47,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
+        public  IActionResult Create([Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
             var result =_repositoryBase.Add(post);
 
@@ -60,13 +55,11 @@ namespace Blog.Controllers
         }
 
         // GET: Post/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            
 
-
-
-            return View();
+            var result = _repositoryBase.Get(p => p.Id == id);
+            return View(result);
         }
 
         // POST: Post/Edit/5
@@ -74,7 +67,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
+        public IActionResult Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
             var selectedpost = _repositoryBase.Get(p => p.Id == id);
             selectedpost.MetaTitle = post.MetaTitle;
@@ -95,10 +88,11 @@ namespace Blog.Controllers
         }
 
         // GET: Post/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-
-            return View();
+            var result = _repositoryBase.Get(p => p.Id == id);
+            _repositoryBase.Delete(result);
+            return RedirectToAction("Post");
         }
 
         // POST: Post/Delete/5

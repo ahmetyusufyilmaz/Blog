@@ -30,6 +30,10 @@ namespace Blog
             services.AddControllersWithViews();
             services.AddScoped<BlogContext>();
             services.AddScoped<IRepositoryBase<Post>,RepositoryBase<Post>>();
+            services.AddScoped<IRepositoryBase<Category>, RepositoryBase<Category>>();
+            services.AddScoped<IRepositoryBase<Comment>, RepositoryBase<Comment>>();
+            services.AddScoped<IRepositoryBase<Tag>, RepositoryBase<Tag>>();
+            services.AddScoped<IRepositoryBase<User>, RepositoryBase<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +45,7 @@ namespace Blog
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Shared/Error");
             }
             app.UseStaticFiles();
 
@@ -53,7 +57,7 @@ namespace Blog
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Category}/{action=Index}/{id?}");
             });
         }
     }

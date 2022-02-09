@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.DataAccess;
 using Blog.Models;
+using Blog.DataAccess.EntityFramework;
 
 namespace Blog.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly BlogContext _context;
+        private readonly IRepositoryBase<Comment> _repositoryBase;
 
-        public CommentController(BlogContext context)
+        public CommentController(IRepositoryBase<Comment> repositoryBase)
         {
-            _context = context;
+            _repositoryBase = repositoryBase;
         }
 
         // GET: Comment
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comments.ToListAsync());
+            var result = _repositoryBase.GetAll();
+            return View();
         }
 
         // GET: Comment/Details/5
@@ -33,14 +35,7 @@ namespace Blog.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-
-            return View(comment);
+            return View();
         }
 
         // GET: Comment/Create
@@ -56,29 +51,16 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(comment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            var result = _repositoryBase.Add(comment);
+
             return View(comment);
         }
 
         // GET: Comment/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var comment = await _context.Comments.FindAsync(id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-            return View(comment);
+         
+            return View();
         }
 
         // POST: Comment/Edit/5
@@ -88,50 +70,23 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
         {
-            if (id != comment.Id)
-            {
-                return NotFound();
-            }
+            var selectedcomment = _repositoryBase.Get(p => p.Id == id);
+            selectedcomment.Title = comment.Title;
+            selectedcomment.Published = comment.Published;
+            selectedcomment.CreatedAt = comment.CreatedAt;
+            selectedcomment.Published = comment.Published;
+            selectedcomment.Post = comment.Post;
+            selectedcomment.Contents = comment.Contents;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CommentExists(comment.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(comment);
+            _repositoryBase.Update(selectedcomment);
+            return View();
         }
 
         // GET: Comment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-
-            return View(comment);
+        
+            return View();
         }
 
         // POST: Comment/Delete/5
@@ -139,15 +94,13 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 
         private bool CommentExists(int id)
         {
-            return _context.Comments.Any(e => e.Id == id);
+            return true;
         }
     }
 }
