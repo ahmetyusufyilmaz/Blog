@@ -22,22 +22,17 @@ namespace Blog.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var result = _repositoryBase.GetAll();
             return View(result);
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            return View(result);
         }
 
         // GET: Categories/Create
@@ -51,7 +46,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MetaTitle,Slug,Contents")] Category category)
+        public IActionResult Create([Bind("Id,Title,MetaTitle,Slug,Contents")] Category category)
         {
             var result = _repositoryBase.Add(category);
 
@@ -59,10 +54,10 @@ namespace Blog.Controllers
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-          
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            return View(result);
         }
 
         // POST: Categories/Edit/5
@@ -70,7 +65,7 @@ namespace Blog.Controllers
      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Contents")] Category category)
+        public IActionResult Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Contents")] Category category)
         {
             var selectedcategory = _repositoryBase.Get(p => p.Id == id);
             selectedcategory.MetaTitle = category.MetaTitle;
@@ -78,24 +73,24 @@ namespace Blog.Controllers
             selectedcategory.Slug = category.Slug;
             selectedcategory.Contents = category.Contents;
 
-        
             _repositoryBase.Update(selectedcategory);
             return View();
         }
 
         // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            _repositoryBase.Delete(result);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-       
+           
             return RedirectToAction(nameof(Index));
         }
 

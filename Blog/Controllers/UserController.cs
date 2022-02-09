@@ -21,22 +21,18 @@ namespace Blog.Controllers
         }
 
         // GET: User
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var result = _repositoryBase.GetAll();
-            return View();
+            return View(result);
         }
 
         // GET: User/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            return View();
+            var result = _repositoryBase.Get(u => u.Id == id);
+            return View(result);
         }
 
         // GET: User/Create
@@ -50,7 +46,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
+        public IActionResult Create([Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
         {
             var result = _repositoryBase.Add(user);
 
@@ -58,9 +54,10 @@ namespace Blog.Controllers
         }
 
         // GET: User/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            return View();
+            var result = _repositoryBase.Get(u => u.Id == id);
+            return View(result);
         }
 
         // POST: User/Edit/5
@@ -68,7 +65,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
+        public IActionResult Edit(int id, [Bind("Id,FirstName,LastName,Mobile,Email,Password,RegisteredAt,LastLogin,Intro,Profile")] User user)
         {
             var selecteduser = _repositoryBase.Get(p => p.Id == id);
             selecteduser.FirstName = user.FirstName;
@@ -86,15 +83,17 @@ namespace Blog.Controllers
         }
 
         // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-            return View();
+            var result = _repositoryBase.Get(u => u.Id == id);
+            _repositoryBase.Delete(result);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             return RedirectToAction(nameof(Index));
         }

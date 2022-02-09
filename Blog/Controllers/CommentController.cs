@@ -21,21 +21,17 @@ namespace Blog.Controllers
         }
 
         // GET: Comment
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var result = _repositoryBase.GetAll();
-            return View();
+            return View(result);
         }
 
         // GET: Comment/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            return View(result);
         }
 
         // GET: Comment/Create
@@ -49,7 +45,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
+        public IActionResult Create([Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
         {
             var result = _repositoryBase.Add(comment);
 
@@ -57,10 +53,10 @@ namespace Blog.Controllers
         }
 
         // GET: Comment/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-         
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            return View(result);
         }
 
         // POST: Comment/Edit/5
@@ -68,7 +64,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
+        public IActionResult Edit(int id, [Bind("Id,Title,Published,CreatedAt,PublishedAt,Contents")] Comment comment)
         {
             var selectedcomment = _repositoryBase.Get(p => p.Id == id);
             selectedcomment.Title = comment.Title;
@@ -83,16 +79,17 @@ namespace Blog.Controllers
         }
 
         // GET: Comment/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-        
-            return View();
+            var result = _repositoryBase.Get(c => c.Id == id);
+            _repositoryBase.Delete(result);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Comment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             
             return RedirectToAction(nameof(Index));

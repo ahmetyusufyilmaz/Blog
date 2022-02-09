@@ -21,22 +21,17 @@ namespace Blog.Controllers
         }
 
         // GET: Tag
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var result = _repositoryBase.GetAll();
-            return View();
+            return View(result);
         }
 
         // GET: Tag/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            return View();
+            var result = _repositoryBase.Get(t => t.Id == id);
+            return View(result);
         }
 
         // GET: Tag/Create
@@ -50,7 +45,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,MetaTitle,Slug,Contents")] Tag tag)
+        public IActionResult Create([Bind("Id,Title,MetaTitle,Slug,Contents")] Tag tag)
         {
             var result = _repositoryBase.Add(tag);
 
@@ -58,9 +53,10 @@ namespace Blog.Controllers
         }
 
         // GET: Tag/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            return View();
+            var result = _repositoryBase.Get(t => t.Id == id);
+            return View(result);
         }
 
         // POST: Tag/Edit/5
@@ -68,7 +64,7 @@ namespace Blog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Contents")] Tag tag)
+        public IActionResult Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Contents")] Tag tag)
         {
             var selectedtag = _repositoryBase.Get(p => p.Id == id);
             selectedtag.Title = tag.Title;
@@ -82,15 +78,17 @@ namespace Blog.Controllers
         }
 
         // GET: Tag/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
-            return View();
+            var result = _repositoryBase.Get(t => t.Id == id);
+            _repositoryBase.Delete(result);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Tag/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
            
             return RedirectToAction(nameof(Index));

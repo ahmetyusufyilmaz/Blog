@@ -92,13 +92,13 @@ namespace Blog.Controllers
         {
             var result = _repositoryBase.Get(p => p.Id == id);
             _repositoryBase.Delete(result);
-            return RedirectToAction("Post");
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
 
             return RedirectToAction(nameof(Index));
