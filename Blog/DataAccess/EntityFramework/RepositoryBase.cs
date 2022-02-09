@@ -7,11 +7,12 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Blog.Entities;
+using Blog.Models;
 
 namespace Blog.DataAccess.EntityFramework
 {
-    public class RepositoryBase<TEntity, TContext> : IRepositoryBase<TEntity>
-      where TEntity : IEntity
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity>
+         where TEntity : IEntity
     {
         private readonly BlogContext _dbcontext;
 
@@ -23,27 +24,33 @@ namespace Blog.DataAccess.EntityFramework
 
         public bool Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbcontext.Set<TEntity>().Add(entity);
+            return _dbcontext.SaveChanges() > 0 ? true : false;
+           
         }
 
         public bool Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+             _dbcontext.Set<TEntity>().Remove(entity);
+             return _dbcontext.SaveChanges() > 0 ? true : false;
+            
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+             return _dbcontext.Set<TEntity>().SingleOrDefault(filter);
+           
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return _dbcontext.Set<TEntity>().ToList();
         }
 
         public bool Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbcontext.Set<TEntity>().Update(entity);
+            return _dbcontext.SaveChanges() > 0 ? true : false;
         }
     }
 }

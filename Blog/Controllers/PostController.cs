@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Blog.DataAccess;
 using Blog.Models;
+using Blog.DataAccess.EntityFramework;
 
 namespace Blog.Controllers
 {
     public class PostController : Controller
     {
-        private readonly BlogContext _context;
+       
+        private readonly IRepositoryBase<Post> _repositoryBase;
 
-        public PostController(BlogContext context)
+        public PostController( IRepositoryBase<Post> repositoryBase)
         {
-            _context = context;
+            _repositoryBase = repositoryBase;
         }
 
         // GET: Post
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+           var result =_repositoryBase.GetAll();
+           
+            return View();
         }
 
         // GET: Post/Details/5
@@ -33,14 +37,8 @@ namespace Blog.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (post == null)
-            {
-                return NotFound();
-            }
 
-            return View(post);
+            return View();
         }
 
         // GET: Post/Create
@@ -56,29 +54,19 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(post);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            var result =_repositoryBase.Add(post);
+
             return View(post);
         }
 
         // GET: Post/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
 
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-            return View(post);
+
+
+            return View();
         }
 
         // POST: Post/Edit/5
@@ -88,50 +76,29 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
-            if (id != post.Id)
-            {
-                return NotFound();
-            }
+            var selectedpost = _repositoryBase.Get(p => p.Id == id);
+            selectedpost.MetaTitle = post.MetaTitle;
+            selectedpost.Title = post.Title;
+            selectedpost.Published = post.Published;
+            selectedpost.PublishedAt = post.PublishedAt;
+            selectedpost.Categories = post.Categories;
+            selectedpost.Contents = post.Contents;
+            selectedpost.CreatedAt = post.CreatedAt;
+            selectedpost.Slug = post.Slug;
+            selectedpost.Summary= post.Summary;
+            selectedpost.Tags = post.Tags;
+            selectedpost.UpdatedAt = post.UpdatedAt;
+            selectedpost.User = post.User;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(post);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PostExists(post.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(post);
+            _repositoryBase.Update(selectedpost);
+            return View();
         }
 
         // GET: Post/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            return View(post);
+            return View();
         }
 
         // POST: Post/Delete/5
@@ -139,15 +106,13 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool PostExists(int id)
         {
-            return _context.Posts.Any(e => e.Id == id);
+            return true;
         }
     }
 }

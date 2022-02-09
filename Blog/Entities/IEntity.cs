@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Entities
 {
-    public interface IEntity
+    public abstract class IEntity
     {
 
     }

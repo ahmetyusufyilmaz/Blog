@@ -1,4 +1,6 @@
 using Blog.DataAccess;
+using Blog.DataAccess.EntityFramework;
+using Blog.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,8 @@ namespace Blog
         {
             services.AddDbContext<BlogContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DBBlog"]));
             services.AddControllersWithViews();
+            services.AddScoped<BlogContext>();
+            services.AddScoped<IRepositoryBase<Post>,RepositoryBase<Post>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
