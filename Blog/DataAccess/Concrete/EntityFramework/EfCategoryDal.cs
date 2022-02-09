@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Blog.DataAccess.Concrete.EntityFramework
 {
-    public class EfCategoryDal : RepositoryBase<Category>, ICategoryDal
+    public class EfCategoryDal 
     {
     }
 }
