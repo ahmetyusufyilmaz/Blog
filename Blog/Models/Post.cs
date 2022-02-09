@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Blog.Entities;
 
 namespace Blog.Models
 {
-    public class Post
+    public class Post : IEntity
     {
         public int Id { get; set; }
         public User User { get; set; }
@@ -23,7 +24,12 @@ namespace Blog.Models
         public DateTime UpdatedAt { get; set; }
         public DateTime PublishedAt { get; set; }
         [Required]
-        public string Content { get; set; }
+        public string Contents { get; set; }
+
+        public ICollection<Category> Categories { get; set; }
+        public ICollection<Tag> Tags { get; set; }
+
+
 
     }
 }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Blog.Entities;
 
 namespace Blog.Models
 {
-    public class Comment
+    public class Comment : IEntity
     {  
             public int Id { get; set; }
             [Required]
@@ -19,7 +20,7 @@ namespace Blog.Models
             public DateTime CreatedAt { get; set; }
             public DateTime PublishedAt { get; set; }
             [MaxLength(500)]
-            public string Context { get; set; }
+            public string Contents { get; set; }
     
     }
 }
