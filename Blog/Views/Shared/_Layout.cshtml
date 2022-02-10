@@ -23,35 +23,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; 
-                        border: 2px solid black;margin-left:8px;" href="/Home/Index/"><b>Home</b></a>
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 1px solid black; margin-left: 8px;" href="/Home/Index/"><b>Home</b></a>
                        
                     </li>
 
                     <li class="nav-item dropdown">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-outline-light dropdown-toggle" 
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-                                    style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" 
+                            <button type="button" class="btn btn-outline-light dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="font-family: 'Arial Rounded MT'; border: 1px solid black; margin-left: 8px;"
                                     href="/Category/Index">
                                 <b>Categories</b>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #dc3545;">
-                                <a class="dropdown-item" href="#"><b>Programming</b></a>
-                                <a class="dropdown-item" href="#"><b>News</b></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #dc3545; ">
+                                <a class="dropdown-item "style="color:white;text-shadow:1px 2px 4px black" href="#"><b>Technology</b></a>
+                                <a class="dropdown-item"style="color:white;text-shadow:1px 2px 4px black" href="#"><b>Movies</b></a>
+                                <a class="dropdown-item"style="color:white;text-shadow:1px 2px 4px black" href="#"><b>Sports</b></a>
+                                <a class="dropdown-item"style="color:white;text-shadow:1px 2px 4px black" href="#"><b>Music</b></a>
+
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/Category/Index/"><b>Something else here</b></a>
+                                <a class="dropdown-item" style="color:white;text-shadow:1px 2px 4px black" href="/Category/Index/"><b>Something else here</b></a>
                             </div>
                         </div>
 </li>
                     <li class="nav-item">
-                        @*<a class="nav-link active" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; 
-                        border: 2px solid black; " href="/Home/About"><b>About Me</b></a>*@
-                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" href="/Home/About"><b>About Me</b></a>
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 1px solid black; margin-left: 8px; " href="/Home/About"><b>About Me</b></a>
                     </li>
                     <li class="nav-item">
-                        @*<a class="nav-link active" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 2px solid black; " href="/Home/Contact"><b>Contact</b></a>*@
-                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" href="/Home/Contact"><b>Contact</b></a>
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 1px solid black; margin-left: 8px; " href="/Home/Contact"><b>Contact</b></a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="@ViewBag.searchUrl" method="post">
@@ -70,15 +69,15 @@
     </div>
 
     <footer class="border-top footer text-muted bg-danger">
-       
-        <div class="wp-block-group__inner-container row justify-content-center align-items-center">
-            <h4 style="margin-right: 15px; font-family: 'Arial Rounded MT'; color:white">Social Links: </h4>
-            <img src="https://img.icons8.com/color/50/000000/facebook-new.png" class="facebook-logo" />
-            <img src="https://img.icons8.com/color/48/000000/twitter--v1.png" class="twitter-logo" style="margin-left:10px;" />
-            <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" class="instagram-logo" style="margin-left:10px;" />
-            <img src="https://img.icons8.com/color/48/000000/linkedin.png" class="linkedin-logo" style="margin-left:10px;" />
-            
-</div>
+
+        <div class="wp-block-group__inner-container row justify-content-center align-items-center" >
+            <a href="https://www.facebook.com" target="_blank"> <img src="https://img.icons8.com/color/50/000000/facebook-new.png" class="facebook-logo"></a>
+            <a href="https://www.twitter.com" target="_blank">  <img src="https://img.icons8.com/color/48/000000/twitter--v1.png" class="twitter-logo" style="margin-left:10px;"></a>
+            <a href="https://www.instagram.com" target="_blank"> <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" class="instagram-logo" style="margin-left:10px;"></a>
+            <a href="https://www.linkedin.com" target="_blank">  <img src="https://img.icons8.com/color/48/000000/linkedin.png" class="linkedin-logo" style="margin-left:10px;"></a>
+            <a href="https://mail.google.com/" target="_blank"> <img src="https://img.icons8.com/office/44/000000/gmail-login.png" class="gmail-logo" style="margin-bottom:6px; margin-left:14px"></a>
+        </div>
+        <h6 style="text-align:center; color:white">&copy; @DateTime.Now.Year - My ASP.NET Core Web Application</h6>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

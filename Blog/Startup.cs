@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 namespace Blog
 {
@@ -26,19 +27,22 @@ namespace Blog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddDbContext<BlogContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DBBlog"]));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<BlogContext>();
             services.AddScoped<IRepositoryBase<Post>,RepositoryBase<Post>>();
             services.AddScoped<IRepositoryBase<Category>, RepositoryBase<Category>>();
             services.AddScoped<IRepositoryBase<Comment>, RepositoryBase<Comment>>();
             services.AddScoped<IRepositoryBase<Tag>, RepositoryBase<Tag>>();
             services.AddScoped<IRepositoryBase<User>, RepositoryBase<User>>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
