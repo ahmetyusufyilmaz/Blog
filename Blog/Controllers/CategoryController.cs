@@ -22,7 +22,7 @@ namespace Blog.Controllers
         }
 
         // GET: Categories
-        public IActionResult Index()
+        public IActionResult GetCategories()
         {
             var result = _repositoryBase.GetAll();
             return View(result);

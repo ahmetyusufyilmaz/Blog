@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Blog.Models.Post>
+
+@{
+    ViewData["Title"] = "PostViewforUser";
+}
+
+<h1>Latest Posts</h1>
+
+<div class="col border border-light bg-white">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12 blogShort">
+            <h1><a href="/post/index/{@item.Id}" class="text-dark"><p class="text-left text-decoration-none">@item.Title</p></a></h1>
+            <div class="row">
+                <div class="col-3"><img src="https://picsum.photos/200/200" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail"></div>
+                <div class="col-9 text-break">
+                    <span>
+                        <p class="text">
+                            <b>@item.MetaTitle</b>
+                        </p>
+                        <br />
+                        <p class="text">
+                            @item.Contents
+                        </p>
+
+                    </span>
+                </div>
+
+            </div>
+
+            <a class="btn btn-info pull-right mb-10" href="/post/index/2">READ MORE</a>
+        </div>
+
+
+    }
+</div>
+  

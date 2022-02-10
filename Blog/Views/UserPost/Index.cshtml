@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Blog.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<a href="https://icons8.com/icon/43579/speech"></a>
+<a href="https://icons8.com/icon/43818/love"></a>
+<style>
+ 
+    .btn-danger {
+        width: 100px !important;
+        height:30px !important;
+        font-size:small;
+    }
+</style>
+<h3 style="margin-top: 2%; color: #dc3545"><u>Latest Posts</u></h3><br />
+
+<div class="col border border-light bg-white">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12 blogShort">
+            <h3><a href="/userpost/index/{@item.Id}" class="text-dark"><p class="text-left text-decoration-none">@item.Title</p></a></h3>
+            <div class="row">
+                <div class="col-3"><img src="https://i.teknolojioku.com/2/1546/870/storage/files/images/2022/02/09/playstation-5-uj7l-cover-qa5G_cover.jpg.webp" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail"></div>
+                <div class="col-9 text-break">
+                    <span>
+                        <p class="text">
+                            <b>@item.MetaTitle</b>
+                        </p>
+                        <br />
+                        <p class="text">
+                            @item.Contents.Substring(0, 300);
+
+                        </p>
+                        <a class="date" style="margin-left:2%"><b>@item.PublishedAt.ToShortDateString()</b> </a>
+                        <img class="comment" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-topic.png" />5
+                        <img class="like" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-like.png" />14
+                        <a class="tags" style="margin-left:2%; color: #dc3545">#technology #sony #playstation</a>
+                        
+                        <a class="btn btn-danger pull-right" style="float:right" href="/post/index/2">READ MORE</a>
+                    </span>
+                </div>
+            </div>  
+        </div>
+
+        <div class="col-md-12 blogShort">
+            <h3><a href="/userpost/index/{@item.Id}" class="text-dark"><p class="text-left text-decoration-none">@item.Title</p></a></h3>
+            <div class="row">
+                <div class="col-3"><img src="https://www.cepkolik.com/wp-content/uploads/2022/02/Android-13.jpg" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail"></div>
+                <div class="col-9 text-break">
+                    <span>
+                        <p class="text">
+                            <b>@item.MetaTitle</b>
+                        </p>
+                        <br />
+                        <p class="text">
+                            @item.Contents.Substring(0, 300);
+
+                        </p> 
+                        <a class="date" style="margin-left:2%"><b>@item.PublishedAt.ToShortDateString()</b> </a>
+                        <img class="comment" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-topic.png" />3
+                        <img class="like" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-like.png" />11
+                        <a class="tags" style="margin-left:2%; color: #dc3545">#technology #sony #playstation</a>
+                        
+                        <a class="btn btn-danger pull-right" style="float:right" href="/post/index/2">READ MORE</a>
+
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>
