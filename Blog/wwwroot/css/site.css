@@ -7,6 +7,9 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+
+
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -50,6 +53,8 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */

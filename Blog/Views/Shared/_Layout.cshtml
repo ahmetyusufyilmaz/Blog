@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Blog</title>
+    <link href="~/css/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <a href="https://icons8.com/icon/sXm12ie1GUjg/laptop-coding"></a>
     <a href="https://icons8.com/icon/VePnztDVWGMn/blog"></a>
@@ -14,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-danger">
             <img src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/40/000000/external-blog-copywriting-itim2101-lineal-color-itim2101-1.png" />
-            <a class="navbar-brand" style="font-family:'Arial Rounded MT';color:white; margin-left:8px;" href="#"><b>Blog</b></a>
+            <a class="navbar-brand" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;" href="/Home/Index"><b>Blog</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,31 +23,41 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link "style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 1px solid black; " href="/Category/Index"><b>Home</b></a> 
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; 
+                        border: 2px solid black;margin-left:8px;" href="/Home/Index/"><b>Home</b></a>
+                       
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active"style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 1px solid black; " href="/Home/About"><b>About Me</b></a>
 
-                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 1px solid black; " href="/Category/Index">
-                            <b>Categories</b> </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Programming</a>
-                            <a class="dropdown-item" href="#">News</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-light dropdown-toggle" 
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                                    style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" 
+                                    href="/Category/Index">
+                                <b>Categories</b>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #dc3545;">
+                                <a class="dropdown-item" href="#"><b>Programming</b></a>
+                                <a class="dropdown-item" href="#"><b>News</b></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/Category/Index/"><b>Something else here</b></a>
+                            </div>
                         </div>
+</li>
+                    <li class="nav-item">
+                        @*<a class="nav-link active" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; 
+                        border: 2px solid black; " href="/Home/About"><b>About Me</b></a>*@
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" href="/Home/About"><b>About Me</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 1px solid black; " href="/Home/Contact"><b>Contact</b></a>
+                        @*<a class="nav-link active" style="font-family: 'Arial Rounded MT'; color: white; margin-left: 8px; border: 2px solid black; " href="/Home/Contact"><b>Contact</b></a>*@
+                        <a class="btn btn-outline-light" style="font-family: 'Arial Rounded MT'; border: 2px solid black; margin-left: 8px;" href="/Home/Contact"><b>Contact</b></a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="@ViewBag.searchUrl" method="post">
                     @Html.AntiForgeryToken()
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="background-color:lightgray">Search</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="border: 2px solid black;" >
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" style="background-color:lightgray; border: 2px solid black;">Search</button>
                 </form>
             </div>
         </nav>
@@ -58,10 +69,16 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="wp-block-group__inner-container row justify-content-center align-items-center" >
-            <p class="has-text-align-center has-primary-color has-text-color has-medium-font-size"><img data-attachment-id="310" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/facebook-2661207_640/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/facebook-2661207_640.jpg" data-orig-size="640,640" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="facebook-2661207_640" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/facebook-2661207_640.jpg?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/facebook-2661207_640.jpg?w=640" class="wp-image-310" style="width:26px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/facebook-2661207_640.jpg" alt="" scale="0"><span style="text-decoration:underline;"><a rel="noreferrer noopener" href="https://www.facebook.com/yusufyilmaz95" target="_blank">Facebook</a></span> – <img data-attachment-id="311" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/unnamed/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed.png" data-orig-size="512,512" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="unnamed" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed.png?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed.png?w=512" class="wp-image-311" style="width:25px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed.png" alt="" scale="0"><a rel="noreferrer noopener" href="https://twitter.com/yilmayus" target="_blank">Twitter</a> – <img data-attachment-id="312" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/instagram_logo_2016-svg/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/instagram_logo_2016.svg_.png" data-orig-size="1200,1200" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Instagram_logo_2016.svg" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/instagram_logo_2016.svg_.png?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/instagram_logo_2016.svg_.png?w=750" class="wp-image-312" style="width:25px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/instagram_logo_2016.svg_.png" alt="" scale="0"><a rel="noreferrer noopener" href="https://www.instagram.com/a.y.yilmaz" target="_blank">Instagram</a> – <img data-attachment-id="315" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/unnamed-1/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-1.png" data-orig-size="512,512" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="unnamed (1)" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-1.png?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-1.png?w=512" class="wp-image-315" style="width:24px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-1.png" alt="" scale="0"><span style="text-decoration:underline;"><a rel="noreferrer noopener" href="https://www.linkedin.com/in/ahmetyusufy%C4%B1lmaz" target="_blank">Linkedin</a></span> – <img data-attachment-id="318" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/unnamed-2/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-2.png" data-orig-size="512,512" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="unnamed (2)" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-2.png?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-2.png?w=512" class="wp-image-318" style="width:22px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-2.png" alt="" scale="0"><span style="text-decoration:underline;"><a rel="noreferrer noopener" href="https://github.com/ahmetyusufyilmaz" target="_blank">Github</a></span> – <img data-attachment-id="321" data-permalink="https://ayyilmaz.home.blog/ahmet-yusuf-yilmaz/unnamed-3/" data-orig-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-3.png" data-orig-size="512,512" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="unnamed (3)" data-image-description="" data-image-caption="" data-medium-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-3.png?w=300" data-large-file="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-3.png?w=512" class="wp-image-321" style="width:22px;" src="https://ayyilmazhome.files.wordpress.com/2021/12/unnamed-3.png" alt="" scale="0"><span style="text-decoration:underline;"><a href="https://open.spotify.com/user/yilmayus" target="_blank" rel="noreferrer noopener">Spotify</a></span></p>
-        </div>
+    <footer class="border-top footer text-muted bg-danger">
+       
+        <div class="wp-block-group__inner-container row justify-content-center align-items-center">
+            <h4 style="margin-right: 15px; font-family: 'Arial Rounded MT'; color:white">Social Links: </h4>
+            <img src="https://img.icons8.com/color/50/000000/facebook-new.png" class="facebook-logo" />
+            <img src="https://img.icons8.com/color/48/000000/twitter--v1.png" class="twitter-logo" style="margin-left:10px;" />
+            <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" class="instagram-logo" style="margin-left:10px;" />
+            <img src="https://img.icons8.com/color/48/000000/linkedin.png" class="linkedin-logo" style="margin-left:10px;" />
+            
+</div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
