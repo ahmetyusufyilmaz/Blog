@@ -8,7 +8,7 @@ using Blog.Entities;
 
 namespace Blog.Models
 {
-    public class Post : IEntity
+    public class Tag : IEntity
     {
         public int Id { get; set; }
         public User User { get; set; }

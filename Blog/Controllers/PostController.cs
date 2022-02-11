@@ -16,17 +16,17 @@ namespace Blog.Controllers
     public class PostController : Controller
     {
        
-        private readonly IRepositoryBase<Post> _repositoryBase;
+        private readonly IPostRepository<Post> _IPostRepository;
 
-        public PostController( IRepositoryBase<Post> repositoryBase)
+        public PostController(IPostRepository<Post> IPostRepository)
         {
-            _repositoryBase = repositoryBase;
+            _IPostRepository = IPostRepository;
         }
 
         // GET: Post
         public IActionResult Index()
         {
-           var result =_repositoryBase.GetAll();
+           var result = _IPostRepository.GetAll();
            
             return View(result);
         }
@@ -34,7 +34,7 @@ namespace Blog.Controllers
         // GET: Post/Details/5
         public IActionResult Details(int? id)
         {
-            var result = _repositoryBase.Get(p => p.Id == id);
+            var result = _IPostRepository.Get(p => p.Id == id);
             return View(result);
         }
 
@@ -45,13 +45,12 @@ namespace Blog.Controllers
         }
 
         // POST: Post/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public  IActionResult Create([Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
-            var result =_repositoryBase.Add(post);
+            var result = _IPostRepository.Add(post);
 
             return View(post);
         }
@@ -60,7 +59,7 @@ namespace Blog.Controllers
         public IActionResult Edit(int? id)
         {
 
-            var result = _repositoryBase.Get(p => p.Id == id);
+            var result = _IPostRepository.Get(p => p.Id == id);
             return View(result);
         }
 
@@ -71,7 +70,7 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Title,MetaTitle,Slug,Summary,Published,CreatedAt,UpdatedAt,PublishedAt,Contents")] Post post)
         {
-            var selectedpost = _repositoryBase.Get(p => p.Id == id);
+            var selectedpost = _IPostRepository.Get(p => p.Id == id);
             selectedpost.MetaTitle = post.MetaTitle;
             selectedpost.Title = post.Title;
             selectedpost.Published = post.Published;
@@ -85,15 +84,15 @@ namespace Blog.Controllers
             selectedpost.UpdatedAt = post.UpdatedAt;
             selectedpost.User = post.User;
 
-            _repositoryBase.Update(selectedpost);
+            _IPostRepository.Update(selectedpost);
             return View();
         }
 
         // GET: Post/Delete/5
         public IActionResult Delete(int? id)
         {
-            var result = _repositoryBase.Get(p => p.Id == id);
-            _repositoryBase.Delete(result);
+            var result = _IPostRepository.Get(p => p.Id == id);
+            _IPostRepository.Delete(result);
             return RedirectToAction(nameof(Index));
         }
 
