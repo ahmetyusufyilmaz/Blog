@@ -19,7 +19,8 @@ namespace Blog.Models
         public string Slug { get; set; }
         [MaxLength(300)]
         public string Contents { get; set; }
-        ICollection<Post> Posts { get; set; }
+        
+        public virtual ICollection<Post> Posts { get; set; }
 
 
     }

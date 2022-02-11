@@ -12,6 +12,7 @@ namespace Blog.Models
     {
         public int Id { get; set; }
         public User User { get; set; }
+   
         [Required]
         [MaxLength(150)]
         public string Title { get; set; }
@@ -26,7 +27,7 @@ namespace Blog.Models
         [Required]
         public string Contents { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         public ICollection<Tag> Tags { get; set; }
 
 

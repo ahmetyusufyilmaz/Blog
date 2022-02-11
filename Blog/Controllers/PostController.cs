@@ -11,6 +11,8 @@ using Blog.DataAccess.EntityFramework;
 
 namespace Blog.Controllers
 {
+    /*[Route("/[controller]s")] */
+    
     public class PostController : Controller
     {
        
