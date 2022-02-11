@@ -1,4 +1,5 @@
 ﻿using Blog.Entities;
+using Blog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Blog.DataAccess
 {
-    public interface ITagRepository<TEntity> where TEntity : IEntity
+    public interface ITagRepository
     {
-        List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
+        List<Tag> GetAll(Expression<Func<Tag, bool>> filter = null);
 
-        TEntity Get(Expression<Func<TEntity, bool>> filter);
+        Tag Get(Expression<Func<Tag, bool>> filter);
 
-        bool Add(TEntity entity);
-        bool Update(TEntity entity);
-        bool Delete(TEntity entity);
+        bool Add(Tag tag);
+        bool Update(Tag tag);
+        bool Delete(Tag tag);
     }
 }

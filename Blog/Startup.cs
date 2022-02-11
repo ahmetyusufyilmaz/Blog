@@ -31,11 +31,7 @@ namespace Blog
             services.AddDbContext<BlogContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DBBlog"]));
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<BlogContext>();
-            services.AddScoped<IRepositoryBase<Post>,RepositoryBase<Post>>();
-            services.AddScoped<IRepositoryBase<Category>, RepositoryBase<Category>>();
-            services.AddScoped<IRepositoryBase<Comment>, RepositoryBase<Comment>>();
-            services.AddScoped<IRepositoryBase<Tag>, RepositoryBase<Tag>>();
-            services.AddScoped<IRepositoryBase<User>, RepositoryBase<User>>();
+            services.AddScoped<IPostRepository,PostRepository>();
            
         }
 

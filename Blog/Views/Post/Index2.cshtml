@@ -8,10 +8,11 @@
 <style>
  
     .btn-danger {
-        width: 100px !important;
+        width: 88px !important;
         height:30px !important;
         font-size:small;
     }
+
 </style>
 <h3 style="margin-top: 2%; color: #dc3545"><u>Latest Posts</u></h3><br />
 
@@ -19,11 +20,12 @@
     @foreach (var item in Model)
     {
         <div class="col-md-12 blogShort">
-            <h3><a href="/userpost/index/{@item.Id}" class="text-dark"><p class="text-left text-decoration-none">@item.Title</p></a></h3>
+            <h3><a href="/post/index2/{@item.Id}" class="text-dark"><p class="text-left text-decoration-none">@item.Title</p></a></h3>
             <div class="row">
                 <div class="col-3"><img src="https://i.teknolojioku.com/2/1546/870/storage/files/images/2022/02/09/playstation-5-uj7l-cover-qa5G_cover.jpg.webp" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail"></div>
                 <div class="col-9 text-break">
                     <span>
+
                         <p class="text">
                             <b>@item.MetaTitle</b>
                         </p>
@@ -34,10 +36,16 @@
                         </p>
                         <a class="date" style="margin-left:2%"><b>@item.PublishedAt.ToShortDateString()</b> </a>
                         <img class="comment" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-topic.png" />5
-                        <img class="like" style="margin-left:3%" src="https://img.icons8.com/small/16/000000/filled-like.png" />14
-                        <a class="tags" style="margin-left:2%; color: #dc3545">#technology #sony #playstation</a>
-                        
-                        <a class="btn btn-danger pull-right" style="float:right" href="/post/index/2">READ MORE</a>
+                        <img class="like" style="margin-left: 3%" src="https://img.icons8.com/small/16/000000/filled-like.png" />14
+                       
+                        @foreach (var tag in @item.Tags)
+                        {
+                            <button type="button" class="btn btn-outline-secondary" style="border:none">
+                                <a href="/posts/tags/@tag.Title" class="visually-hidden" style="color: #dc3545">#@tag.Title</a>
+                            </button>
+                        }
+
+                        <a class="btn btn-danger pull-right" style="float:right" href="/post/index/2">Read More</a>
                     </span>
                 </div>
             </div>  
@@ -57,6 +65,9 @@
         </ul>
     </nav>
 </div>
+
+
+
  <div class="container" style="height:150px;">
      
  </div>

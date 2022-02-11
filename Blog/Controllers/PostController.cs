@@ -16,9 +16,9 @@ namespace Blog.Controllers
     public class PostController : Controller
     {
        
-        private readonly IPostRepository<Post> _IPostRepository;
+        private readonly IPostRepository _IPostRepository;
 
-        public PostController(IPostRepository<Post> IPostRepository)
+        public PostController(IPostRepository IPostRepository)
         {
             _IPostRepository = IPostRepository;
         }
@@ -28,6 +28,12 @@ namespace Blog.Controllers
         {
            var result = _IPostRepository.GetAll();
            
+            return View(result);
+        }
+        public IActionResult Index2()
+        {
+            var result = _IPostRepository.GetAll();
+
             return View(result);
         }
 

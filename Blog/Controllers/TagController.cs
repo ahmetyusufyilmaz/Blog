@@ -13,9 +13,9 @@ namespace Blog.Controllers
 {
     public class TagController : Controller
     {
-        private readonly ITagRepository<Tag> _ITagRepository;
+        private readonly ITagRepository _ITagRepository;
 
-        public TagController(ITagRepository<Tag> repositoryBase)
+        public TagController(ITagRepository repositoryBase)
         {
             _ITagRepository = repositoryBase;
         }

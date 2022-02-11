@@ -1,4 +1,5 @@
 ﻿using Blog.Entities;
+using Blog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,12 @@ using System.Threading.Tasks;
 
 namespace Blog.DataAccess
 {
-    public interface IPostRepository<TEntity> where TEntity : IEntity
+    public interface IPostRepository
     {
-        List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
-
-        TEntity Get(Expression<Func<TEntity, bool>> filter);
-
-        bool Add(TEntity entity);
-        bool Update(TEntity entity);
-        bool Delete(TEntity entity);
-   
+        List<Post> GetAll(Expression<Func<Post, bool>> filter = null);
+        Post Get(Expression<Func<Post, bool>> filter);
+        bool Add(Post post);
+        bool Update(Post post);
+        bool Delete(Post post);
     }
 }
