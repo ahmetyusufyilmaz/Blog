@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Application.Interfaces
+namespace Blog.DomainServices.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {

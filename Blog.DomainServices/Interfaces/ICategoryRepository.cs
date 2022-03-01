@@ -1,13 +1,15 @@
 ﻿using Blog.Domain.Entities;
+using Blog.DomainServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Application.Interfaces
+namespace Blog.DomainServices
 {
-     public interface ITagRepository:IRepository<Tag>
+    public interface ICategoryRepository : IRepository<Category>
     {
+
     }
 }

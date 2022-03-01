@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Blog.Application.Interfaces;
 using Blog.Domain.Entities;
 using Blog.Persistence.Context;
+using Blog.DomainServices;
 
 namespace Blog.Persistence.Repositories
 {
-    class PostRepository : RepositoryBase<Post>, IPostRepository
+    public class PostRepository : RepositoryBase<Post>, IPostRepository
     {
         public PostRepository(UserDbContext context) : base(context)
         {

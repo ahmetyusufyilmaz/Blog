@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Blog.Persistence.Context;
-using Blog.Application.Interfaces;
 using Blog.Domain.Entities;
+using Blog.DomainServices;
 
 namespace Blog.Persistence.Repositories
 { 
-    class TagRepository : RepositoryBase<Tag>, ITagRepository
+    public class TagRepository : RepositoryBase<Tag>, ITagRepository
     {
         public TagRepository(UserDbContext context) : base(context)
         {

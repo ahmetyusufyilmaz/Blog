@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Blog.Persistence.Context;
-using Blog.Application.Interfaces;
+using Blog.DomainServices.Interfaces;
 
 namespace Blog.Persistence.Repositories
 {
